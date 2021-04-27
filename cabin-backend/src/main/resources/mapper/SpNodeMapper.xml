@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.catas.cabin.mapper.SpNodeMapper">
+
+    <select id="selectNodeList" resultType="me.catas.cabin.model.SpNode">
+        SELECT
+        id, `name`, `host`, `weight`, `status`, remark, pac_template, gmt_create
+        FROM
+        sp_node
+        <where>
+            is_deleted = 0
+            <if test="name != null and name != ''">
+                AND `name` LIKE concat('%',#{name}, '%')
+            </if>
+            <if test="host != null and host != ''">
+                AND `host` LIKE concat('%',#{host}, '%')
+            </if>
+            <if test="status != null">
+                AND `status` = #{status}
+            </if>
+        </where>
+        ORDER BY gmt_create DESC
+    </select>
+
+    <update id="updateNode">
+        UPDATE sp_node
+        <set>
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="host != null and host != ''">`host` = #{host},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="remark != null and remark != ''">`remark` = #{remark},</if>
+            <if test="pacTemplate != null and pacTemplate != ''">pac_template = #{pacTemplate}</if>
+        </set>
+        WHERE is_deleted = 0
+        AND id = #{id}
+    </update>
+
+</mapper>

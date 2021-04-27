@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.catas.cabin.mapper.SpNodeAgentMapper">
+
+    <select id="selectAgentDataLast" resultType="me.catas.cabin.model.SpNodeAgent">
+        SELECT n.id   AS nodeId,
+               n.name AS nodeName,
+               t.id,
+               t.system_os,
+               t.system_up_time,
+               t.cpu_version,
+               t.cpu_counts,
+               t.cpu_percent,
+               t.used_mem,
+               t.total_mem,
+               t.available_mem,
+               t.mem_percent,
+               t.used_swap,
+               t.total_swap,
+               t.free_swap,
+               t.swap_percent,
+               t.total_disk,
+               t.free_disk,
+               t.used_disk,
+               t.net_send_bytes,
+               t.net_recv_bytes,
+               t.net_send_bytes_per_second,
+               t.net_recv_bytes_per_second,
+               t.gmt_create,
+               t.proxy_status,
+               t.proxy_reqs,
+               t.proxy_service_time
+        FROM (SELECT node_id, MAX(gmt_create) AS gmt_create FROM sp_node_agent GROUP BY node_id) a
+                 LEFT JOIN sp_node_agent t ON t.node_id = a.node_id AND t.gmt_create = a.gmt_create AND
+                                              t.gmt_create > DATE_SUB(NOW(), INTERVAL 5 second)
+                 RIGHT JOIN sp_node n ON n.id = t.node_id
+        WHERE n.is_deleted = 0
+    </select>
+
+    <delete id="deleteAgent">
+        DELETE
+        FROM sp_node_agent
+        WHERE (TO_DAYS(NOW()) - TO_DAYS(gmt_create)) >= 1
+    </delete>
+
+</mapper>
