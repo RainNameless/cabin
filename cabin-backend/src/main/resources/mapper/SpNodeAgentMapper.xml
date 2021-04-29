@@ -4,7 +4,7 @@
 
     <select id="selectAgentDataLast" resultType="me.catas.cabin.model.SpNodeAgent">
         SELECT t.id,
-               t.node_name,
+               a.node_name,
                t.system_os,
                t.system_up_time,
                t.cpu_version,
