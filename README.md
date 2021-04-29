@@ -11,7 +11,7 @@ date: 2021-04-29T19:03:06+08:00
 
 ## 2.后端部署
 
-为了安全起见, 请先修cabin-backend/src/main/resources/application.yml中的密钥
+为了安全起见, 请先修cabin-backend/src/main/resources/application.yml中的密钥，对了还要修改数据源为你自己的mysql地址
 
 ```
 cabin:
