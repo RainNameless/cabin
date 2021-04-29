@@ -1,6 +1,6 @@
 {
   "Server": "127.0.0.1",
   "Port": "6666",
-  "NodeId": "123456",
+  "NodeName": "测试A节点",
   "ClientKey": "E2202F7C346J9067"
 }

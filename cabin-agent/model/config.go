@@ -5,8 +5,8 @@ type Config struct {
 	Server string
 	// 端口
 	Port string
-	// 节点ID
-	NodeId string
+	// 节点名称
+	NodeName string
 	// 客户端Key
 	ClientKey string
 }

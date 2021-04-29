@@ -61,7 +61,7 @@ func Start(config model.Config) {
 			// 收集系统信息
 			utils.CollectInfo(&result)
 			// 设置节点ID
-			result.NodeId = config.NodeId
+			result.NodeName = config.NodeName
 			// 序列化为JSON
 			jsonResult, _ := json.Marshal(result)
 			// 发送AES加密后的数据

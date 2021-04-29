@@ -37,8 +37,8 @@ func checkParams(config model.Config) {
 	if err != nil || (numPort < 0 || numPort > 65535) {
 		panic("端口不正确")
 	}
-	if config.NodeId == "" || config.ClientKey == "" {
-		panic("节点ID或客户端KEY不能为空")
+	if config.NodeName == "" || config.ClientKey == "" {
+		panic("节点名称或客户端KEY不能为空")
 	}
 }
 

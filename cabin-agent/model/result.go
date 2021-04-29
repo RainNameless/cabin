@@ -1,8 +1,8 @@
 package model
 
 type Result struct {
-	// 节点ID
-	NodeId string `json:"nodeId"`
+	// 节点名称
+	NodeName string `json:"nodeName"`
 	// 系统版本
 	SystemOS string `json:"systemOs"`
 	// 系统运行时间(秒)
