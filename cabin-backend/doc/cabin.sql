@@ -11,27 +11,11 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 27/04/2021 11:30:55
+ Date: 29/04/2021 15:36:53
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for sp_node
--- ----------------------------
-DROP TABLE IF EXISTS `sp_node`;
-CREATE TABLE `sp_node` (
-  `id` bigint(64) NOT NULL COMMENT '主键',
-  `name` varchar(32) NOT NULL COMMENT '名称',
-  `host` varchar(64) NOT NULL COMMENT 'host',
-  `status` tinyint(1) DEFAULT '0' COMMENT '0: 可用, 1暂停',
-  `remark` varchar(255) DEFAULT NULL COMMENT '节点备注',
-  `is_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1表示是，0表示否',
-  `gmt_create` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `gmt_modified` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for sp_node_agent
@@ -39,7 +23,7 @@ CREATE TABLE `sp_node` (
 DROP TABLE IF EXISTS `sp_node_agent`;
 CREATE TABLE `sp_node_agent` (
   `id` bigint(64) NOT NULL COMMENT '主键',
-  `node_id` bigint(64) NOT NULL COMMENT '节点ID',
+  `node_name` varchar(64) NOT NULL COMMENT '节点名称',
   `system_os` varchar(30) DEFAULT NULL COMMENT '系统版本',
   `system_up_time` bigint(70) DEFAULT NULL COMMENT '系统运行时间',
   `cpu_version` varchar(60) DEFAULT NULL COMMENT 'CPU版本',

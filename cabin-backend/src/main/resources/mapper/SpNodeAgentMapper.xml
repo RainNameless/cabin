@@ -3,9 +3,8 @@
 <mapper namespace="me.catas.cabin.mapper.SpNodeAgentMapper">
 
     <select id="selectAgentDataLast" resultType="me.catas.cabin.model.SpNodeAgent">
-        SELECT n.id   AS nodeId,
-               n.name AS nodeName,
-               t.id,
+        SELECT t.id,
+               t.node_name,
                t.system_os,
                t.system_up_time,
                t.cpu_version,
@@ -26,15 +25,10 @@
                t.net_recv_bytes,
                t.net_send_bytes_per_second,
                t.net_recv_bytes_per_second,
-               t.gmt_create,
-               t.proxy_status,
-               t.proxy_reqs,
-               t.proxy_service_time
-        FROM (SELECT node_id, MAX(gmt_create) AS gmt_create FROM sp_node_agent GROUP BY node_id) a
-                 LEFT JOIN sp_node_agent t ON t.node_id = a.node_id AND t.gmt_create = a.gmt_create AND
+               t.gmt_create
+        FROM (SELECT node_name, MAX(gmt_create) AS gmt_create FROM sp_node_agent GROUP BY node_name) a
+                 LEFT JOIN sp_node_agent t ON t.node_name = a.node_name AND t.gmt_create = a.gmt_create AND
                                               t.gmt_create > DATE_SUB(NOW(), INTERVAL 5 second)
-                 RIGHT JOIN sp_node n ON n.id = t.node_id
-        WHERE n.is_deleted = 0
     </select>
 
     <delete id="deleteAgent">

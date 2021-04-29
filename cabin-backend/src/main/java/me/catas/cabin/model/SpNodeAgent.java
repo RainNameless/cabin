@@ -1,6 +1,5 @@
 package me.catas.cabin.model;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -18,14 +17,8 @@ public class SpNodeAgent extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 节点ID
-     */
-    private Long nodeId;
-
-    /**
      * 节点名称
      */
-    @TableField(exist = false)
     private String nodeName;
 
     /**
